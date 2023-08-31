@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  app:
+    build: .
+    restart: "no"
+    volumes:
+      - ./:/app
+
+    ports:
+      - 7777:7777
+    depends_on:
+      - database
+    env_file:
+      - project.env
+
+  database:
+    container_name: task_db
+    image: postgres:14.1
+    restart: "no"
+    env_file:
+        - project.env
+
